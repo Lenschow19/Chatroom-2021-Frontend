@@ -13,6 +13,7 @@ import {Message} from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
+  title = 'Welcome to the chat!';
   messageFC = new FormControl('');
   nickNameFC = new FormControl('');
   messages: ChatMessage[] = [];
