@@ -1,6 +1,4 @@
-<div *ngIf="error$ | async as error" style="color: #ff0000">
-  {{error}}
-</div>
+
 
 <div class="row vh-100" style="padding-top: 30px; padding-bottom: 20px" *ngIf="chatClient">
   <div class="col-4">
@@ -12,7 +10,11 @@
           <div *ngIf="clients$ | async as clients">
             <ul>
               <li *ngFor="let client of clients">
-                {{client.nickName}}
+                <div class="media" id="pic"> <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+                  <ul class="col">
+                    {{client.nickName}}
+                  </ul>
+                </div>
               </li>
             </ul>
         </div>
@@ -22,14 +24,27 @@
   <div class="col-8">
     <div class="card h-100">
     <div class="card-header">
-      <h3>Hello {{chatClient.nickName}}!</h3>
+      <h3>Hello {{chatClient.nickName}}! {{socketId}}</h3>
     </div>
-    <div class="card-body">
+    <div class="card-body scroll">
       <ul>
         <section *ngFor="let message of messages">
-          <h4 id="user">{{message.chatClient.nickName}}:</h4>
-          <h4 id="msg">{{message.message}}</h4>
-          <h6 id="timeStamp">({{message.timestamp | date:'mediumTime'}})</h6>
+          <div class="row">
+
+              <div class="media" id="pic">
+                <img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+              </div>
+
+            <ul class="col">
+              <li>
+                <h4 id="user">{{message.chatClient.nickName}}:</h4>
+                <h4 id="msg">{{message.message}}</h4>
+                <h6 id="timeStamp">({{message.timestamp | date:'mediumTime'}})</h6>
+              </li>
+            </ul>
+
+          </div>
+
         </section>
       </ul>
     </div>
@@ -50,6 +65,7 @@
         </span>
             is typing...
           </span>
+
         </div>
       </div>
     </div>
@@ -68,6 +84,12 @@
           <input type="text" [formControl]="nickNameFC" id="nickNameFC">
         </div>
         <div class="row justify-content-end">
+          <div *ngIf="error$ | async as error" style="color: #ff0000">
+            {{error}}
+          </div>
+          <div *ngIf="!socketId" style="color: #ff0000">
+            You are not connected.
+          </div>
           <button type="button" (click)="sendName()" class="btn btn-success">Submit</button>
         </div>
         </form>
