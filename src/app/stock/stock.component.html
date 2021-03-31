@@ -1,0 +1,52 @@
+<h1 id="title">{{title}}</h1>
+
+<div class="row vh-100" style="padding-top: 30px; padding-bottom: 20px">
+  <div class="col-5">
+    <div class="card h-100">
+      <div class="card-header">
+        <div class="row">
+        <div class="col" id="stock">
+          <h2>Stocks</h2>
+        </div>
+        <div class="col row justify-content-end" id="value">
+          <h2>Current Value</h2>
+        </div>
+        </div>
+      </div>
+      <div class="card-body">
+
+          <ul>
+            <li id="list" *ngFor="let stock of stocks" (click)="selectStock(stock)" [class.selected]="stock.id === selectedStock?.id">
+              <div class="row">
+                <div class="col">
+                  {{stock.name}}
+                </div>
+                <div class="col row justify-content-end" id="value">
+                  {{stock.value}} kr.
+                </div>
+              </div>
+            </li>
+          </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-7" *ngIf="selectedStock">
+    <div class="card h-100">
+      <div class="card-header">
+          <h2>{{selectedStock.name}}</h2>
+      </div>
+           <div class="card-body" style="list-style-type: none">
+               <p class="card-text">{{selectedStock.description}}</p>
+               <li>
+                 <mat-form-field>
+                   <input type="number" [formControl]="stockPrice" id="form" > kr.
+                 </mat-form-field>
+               </li>
+                 <button (click)="updatePrice()" [disabled]="!stockPrice.valid" class="btn btn-primary">Update</button>
+           </div>
+    </div>
+  </div>
+
+</div>

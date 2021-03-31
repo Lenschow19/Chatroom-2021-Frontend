@@ -1,7 +1,10 @@
-<div class="container-fluid">
+<div id="page-container">
+  <div id="content-wrap">
   <div class="row navbar-style">
     <a routerLink="/">Home</a> ----
-    <a routerLink="/chats">Go to Chatroom</a>
+    <a routerLink="/chats">Go to Chatroom</a> ---
+    <a routerLink="/stocks">Go to Stock Exchange</a>
   </div>
-<router-outlet></router-outlet>
+  </div>
+  <router-outlet class="router-flex"></router-outlet>
 </div>

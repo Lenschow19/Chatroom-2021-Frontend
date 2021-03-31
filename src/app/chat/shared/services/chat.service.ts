@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Socket} from 'ngx-socket-io';
 import {Observable} from 'rxjs';
 import {ChatClient} from '../models/chat-client.model';
 import {ChatMessage} from '../models/chat-message.model';
 import {WelcomeDto} from '../welcome.dto';
 import {map} from 'rxjs/operators';
+import {SocketChat} from '../../../app.module';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import {map} from 'rxjs/operators';
 export class ChatService {
   chatClient: ChatClient | undefined;
 
-  constructor(private socket: Socket) { }
+  constructor(private socket: SocketChat) { }
 
   sendMessage(msg: ChatMessage): void {
     this.socket.emit('message', msg);
